@@ -1,0 +1,33 @@
+#!/bin/bash
+# open-pdf
+# opens a pdf file. If nothing provided, prompt for file name 
+# open-pdf [optional file] [optional path]
+# docs:    https://github.com/grummerd/open-pdf-all/
+# license: GPL v3+
+# requires: bash, evince
+
+set -e
+shopt -s extglob;
+
+# Set folder
+if [ -n "$2" ]; then
+	folder=${2%%+(/)}
+else
+	folder=${PWD%%+(/)}
+fi
+
+success=0
+
+if [ -n "$1" ]; then
+	if [ -r "$folder/$1" ]; then
+		evince $folder/$1 2>/dev/null 2>&1 &
+		if [ $? -eq 0 ]; then
+			success=1
+		fi
+	fi
+fi
+# file not given. Prompt for a file name
+if [ $success -ne 1 ]; then
+	read -p "Enter File Name: " ; evince $folder/$REPLY 2>/dev/null 2>&1 &
+fi
+exit 1
