@@ -8,6 +8,13 @@ Requirements
 
 open-pdf-all was written in bash on ubuntu. The pdf viewer is evince. Hope to get feedback to extend to other Linux distributions and pdf viewers
 
+Installation
+-------------
+
+cd [download folder]
+sudo cp ./open-pdf* /usr/local/bin/
+sudo chmod +x /usr/local/bin/open-pdf*
+
 Intended use cases
 -------------------
 
