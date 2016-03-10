@@ -12,7 +12,9 @@ Installation
 -------------
 
 cd [download folder]
+
 sudo cp ./open-pdf* /usr/local/bin/
+
 sudo chmod +x /usr/local/bin/open-pdf*
 
 Intended use cases
