@@ -1,0 +1,27 @@
+#!/bin/bash
+# open-pdf-all
+# opens all pdf files in folder
+# open-pdf-all [optional folder]
+# docs:    https://github.com/grummerd/open-pdf-all/
+# license: GPL v3+
+# requires: bash, evince
+
+set -e
+shopt -s extglob;
+
+# Credit: http://stackoverflow.com/questions/9018723/what-is-the-simplest-way-to-remove-a-trailing-slash-from-each-parameter
+# Current directory. Strip off trailing slashes
+folder=${PWD%%+(/)}
+# Is a folder
+if [ -d "$1" ]; then 
+	# not a symlink
+	if [ ! -L "$1" ]; then
+		#Use provided folder. Strip off trailing slashes
+		folder=${1%%+(/)}
+	fi
+fi
+
+# ls -d prevents recursion so only the pdfs in one folder are opened
+gksudo ls -d $folder/*.pdf 2>/dev/null | while read -r file; do { evince "$file" 2>/dev/null 2>&1; } & done
+
+exit 1
